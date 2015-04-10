@@ -1,0 +1,145 @@
+#!/usr/bin/env ruby -w
+
+require 'bundler/setup'
+require 'csv'
+require 'net/sftp'
+
+require_relative '../lib/dsl'
+require_relative '../lib/sample_output_document'
+
+include DSL
+
+CSV_HEADERS = %w(
+  id
+  format
+  variant
+  attendee_name
+  attendee_address_line_1
+  attendee_address_line_2
+  attendee_address_line_3
+  attendee_town
+  attendee_county
+  attendee_postcode
+  lead
+  guider_first_name
+  guider_organisation
+  appointment_reference
+  appointment_date
+  value_of_pension_pots
+  income_in_retirement
+  continue_working
+  unsure
+  leave_inheritance
+  wants_flexibility
+  wants_security
+  wants_lump_sum
+  poor_health
+)
+
+LIMIT = 150
+
+filename = "pensionwise_output_#{Date.today.strftime('%Y%m%d')}.csv"
+long_name = 'Mr Hubert Blain-Wolfeschlegelsteinhausenbergerderr'
+output_documents = []
+
+# Tailored, with one circumstance each
+output_documents << with(:continue_working, 'pension')
+output_documents << with(:continue_working, 'other')
+output_documents << with(:unsure, 'pension')
+output_documents << with(:unsure, 'other')
+output_documents << with(:leave_inheritance, 'pension')
+output_documents << with(:leave_inheritance, 'other')
+output_documents << with(:wants_flexibility, 'pension')
+output_documents << with(:wants_flexibility, 'other')
+output_documents << with(:wants_security, 'pension')
+output_documents << with(:wants_security, 'other')
+output_documents << with(:wants_lump_sum, 'pension')
+output_documents << with(:wants_lump_sum, 'other')
+output_documents << with(:poor_health, 'pension')
+output_documents << with(:poor_health, 'other')
+
+# Generic
+output_documents << with([], 'pension')
+output_documents << with([], 'other')
+
+# Ineligible
+10.times do
+  output_documents << SampleOutputDocument.new(variant: 'other')
+end
+
+# Bad data
+output_documents << SampleOutputDocument.new(variant: 'test')
+output_documents << SampleOutputDocument.new(income_in_retirement: 'lottery')
+output_documents << SampleOutputDocument.new(
+  attendee_name: '',
+  attendee_address_line_1: '',
+  attendee_address_line_2: '',
+  attendee_address_line_3: '',
+  attendee_town: '',
+  attendee_county: '',
+  attendee_postcode: ''
+)
+
+# Max allowed name
+output_documents << SampleOutputDocument.new(attendee_name: long_name)
+
+# Max allowed address
+output_documents << SampleOutputDocument.new(
+  attendee_address_line_1: 'Llanfair-pwllgwyngyll-gogery-chwyrn-drobwll-llan'
+)
+
+# Maxed out address lines
+output_documents << SampleOutputDocument.new(
+  attendee_name: long_name,
+  attendee_address_line_1: 'Apartment 510000 ABCDEFGHIJKLMNOPQRSTUVWXYZAABBCC',
+  attendee_address_line_2: '6100 Lordshipmen-terrington-park-placement Avenue',
+  attendee_address_line_3: 'Maidenvale-tophatnonce Greenfranklin Fortnammting',
+  attendee_town: "A small quaint village that you've never heard of",
+  attendee_county: 'On the border of Oxfordshire and Buckingham-shire',
+  attendee_postcode: 'OX10 6BD'
+)
+
+# Long lead
+output_documents << SampleOutputDocument.new(
+  guider_first_name: long_name,
+  guider_organisation: 'The Pensions Advisory Service',
+  appointment_date: '22 September 2015'
+)
+
+# Random
+200.times do
+  output_documents << SampleOutputDocument.new
+end
+
+# Write CSV for http://github.com/guidance-guarantee-programme/contingent_pdf_output
+CSV.open("./dist/#{filename}", 'wb', col_sep: ',', encoding: 'UTF-16:UTF-8') do |csv|
+  csv << CSV_HEADERS
+
+  output_documents.first(LIMIT).each_with_index do |output_document, index|
+    output_document.id = index + 1
+
+    output_document.attendee_address_line_1,
+      output_document.attendee_address_line_2,
+      output_document.attendee_address_line_3,
+      output_document.attendee_town,
+      output_document.attendee_county,
+      output_document.attendee_postcode = *output_document.attendee_address.compact
+
+    csv << output_document.to_array
+  end
+end
+
+# Upload to SFTP server
+Net::SFTP.start(ENV['SFTP_SERVER'], ENV['SFTP_USER'], password: ENV['SFTP_PASSWORD']) do |sftp|
+  sftp.upload!(
+    StringIO.new(CSV.generate(col_sep: '|', encoding: 'UTF-8') { |csv|
+                   csv << CSV_HEADERS
+
+                   output_documents.first(LIMIT).each_with_index do |output_document, index|
+                     output_document.id = index + 1
+                     csv << output_document.to_array
+                   end
+                 }),
+    "/Data.in/#{filename}"
+  )
+end
