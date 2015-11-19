@@ -4,7 +4,10 @@ require 'bundler/setup'
 require 'csv'
 require 'net/sftp'
 
+require_relative '../lib/dsl'
 require_relative '../lib/sample_output_document'
+
+include DSL
 
 CSV_HEADERS = %w(
   id
@@ -18,6 +21,10 @@ CSV_HEADERS = %w(
   attendee_county
   attendee_postcode
   lead
+  supplementary_benefits
+  supplementary_debt
+  supplementary_ill_health
+  supplementary_defined_benefit_pensions
 )
 
 LIMIT = 150
@@ -26,8 +33,14 @@ filename = "pensionwise_output_#{Date.today.strftime('%Y%m%d')}.csv"
 long_name = 'Mr Hubert Blain-Wolfeschlegelsteinhausenbergerderr'
 output_documents = []
 
+# Supplementary information
+output_documents << with(:supplementary_benefits)
+output_documents << with(:supplementary_debt)
+output_documents << with(:supplementary_ill_health)
+output_documents << with(:supplementary_defined_benefit_pensions)
+
 # Standard
-output_documents << SampleOutputDocument.new
+output_documents << with([])
 
 # Ineligible
 10.times do
