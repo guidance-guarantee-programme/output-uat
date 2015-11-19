@@ -73,8 +73,6 @@ class OutputDocument
       attendee_county,
       attendee_postcode,
       lead,
-      guider_first_name,
-      guider_organisation,
       appointment_date
     ]
   end
