@@ -18,7 +18,6 @@ CSV_HEADERS = %w(
   attendee_county
   attendee_postcode
   lead
-  appointment_date
 )
 
 LIMIT = 150

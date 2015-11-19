@@ -72,8 +72,7 @@ class OutputDocument
       attendee_town,
       attendee_county,
       attendee_postcode,
-      lead,
-      appointment_date
+      lead
     ]
   end
 
