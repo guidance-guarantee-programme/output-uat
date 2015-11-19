@@ -6,7 +6,7 @@ Generate user acceptance testing data for [Pension Wise] appointment output.
 ## Prerequisites
 
 * [Git]
-* [Ruby 2.2.1][Ruby]
+* [Ruby 2.2.3][Ruby]
 
 
 ## Installation
