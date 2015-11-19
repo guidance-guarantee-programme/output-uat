@@ -17,7 +17,6 @@ class SampleOutputDocument < OutputDocument
                  lead: nil,
                  guider_first_name: nil,
                  guider_organisation: nil,
-                 appointment_reference: nil,
                  appointment_date: nil,
                  continue_working: nil,
                  unsure: nil,
@@ -57,10 +56,6 @@ class SampleOutputDocument < OutputDocument
       "#{guider_first_name} from #{guider_organisation} on #{appointment_date}."
 
     super
-  end
-
-  def appointment_reference
-    super || "#{id}/#{rand(123456)}"
   end
 
   def variant

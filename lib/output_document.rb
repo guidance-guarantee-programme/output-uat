@@ -16,7 +16,6 @@ class OutputDocument
                 :lead,
                 :guider_first_name,
                 :guider_organisation,
-                :appointment_reference,
                 :appointment_date,
                 :continue_working,
                 :unsure,
@@ -39,7 +38,6 @@ class OutputDocument
                  lead:,
                  guider_first_name: nil,
                  guider_organisation: nil,
-                 appointment_reference: nil,
                  appointment_date: nil,
                  continue_working: nil,
                  unsure: nil,
@@ -62,7 +60,6 @@ class OutputDocument
     self.lead = lead
     self.guider_first_name = guider_first_name
     self.guider_organisation = guider_organisation
-    self.appointment_reference = appointment_reference
     self.appointment_date = appointment_date
     self.continue_working = continue_working
     self.unsure = unsure
@@ -99,7 +96,6 @@ class OutputDocument
       lead,
       guider_first_name,
       guider_organisation,
-      appointment_reference,
       appointment_date,
       continue_working,
       unsure,

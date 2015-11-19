@@ -23,7 +23,6 @@ CSV_HEADERS = %w(
   lead
   guider_first_name
   guider_organisation
-  appointment_reference
   appointment_date
   continue_working
   unsure
