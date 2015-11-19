@@ -19,7 +19,6 @@ class SampleOutputDocument < OutputDocument
                  guider_organisation: nil,
                  appointment_reference: nil,
                  appointment_date: nil,
-                 income_in_retirement: nil,
                  continue_working: nil,
                  unsure: nil,
                  leave_inheritance: nil,
@@ -45,8 +44,6 @@ class SampleOutputDocument < OutputDocument
     guider_organisation ||= ['The Pensions Advisory Service', 'Pension Wise'].sample
 
     appointment_date ||= Faker::Date.forward(1_825).strftime('%-e %B %Y')
-
-    income_in_retirement = %w(pension other).sample
 
     continue_working = [true, false].sample
     unsure = [true, false].sample

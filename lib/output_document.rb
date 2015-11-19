@@ -18,7 +18,6 @@ class OutputDocument
                 :guider_organisation,
                 :appointment_reference,
                 :appointment_date,
-                :income_in_retirement,
                 :continue_working,
                 :unsure,
                 :leave_inheritance,
@@ -42,7 +41,6 @@ class OutputDocument
                  guider_organisation: nil,
                  appointment_reference: nil,
                  appointment_date: nil,
-                 income_in_retirement: nil,
                  continue_working: nil,
                  unsure: nil,
                  leave_inheritance: nil,
@@ -66,7 +64,6 @@ class OutputDocument
     self.guider_organisation = guider_organisation
     self.appointment_reference = appointment_reference
     self.appointment_date = appointment_date
-    self.income_in_retirement = income_in_retirement
     self.continue_working = continue_working
     self.unsure = unsure
     self.leave_inheritance = leave_inheritance
@@ -104,7 +101,6 @@ class OutputDocument
       guider_organisation,
       appointment_reference,
       appointment_date,
-      income_in_retirement,
       continue_working,
       unsure,
       leave_inheritance,

@@ -25,7 +25,6 @@ CSV_HEADERS = %w(
   guider_organisation
   appointment_reference
   appointment_date
-  income_in_retirement
   continue_working
   unsure
   leave_inheritance
@@ -42,24 +41,16 @@ long_name = 'Mr Hubert Blain-Wolfeschlegelsteinhausenbergerderr'
 output_documents = []
 
 # Tailored, with one circumstance each
-output_documents << with(:continue_working, 'pension')
-output_documents << with(:continue_working, 'other')
-output_documents << with(:unsure, 'pension')
-output_documents << with(:unsure, 'other')
-output_documents << with(:leave_inheritance, 'pension')
-output_documents << with(:leave_inheritance, 'other')
-output_documents << with(:wants_flexibility, 'pension')
-output_documents << with(:wants_flexibility, 'other')
-output_documents << with(:wants_security, 'pension')
-output_documents << with(:wants_security, 'other')
-output_documents << with(:wants_lump_sum, 'pension')
-output_documents << with(:wants_lump_sum, 'other')
-output_documents << with(:poor_health, 'pension')
-output_documents << with(:poor_health, 'other')
+output_documents << with(:continue_working)
+output_documents << with(:unsure)
+output_documents << with(:leave_inheritance)
+output_documents << with(:wants_flexibility)
+output_documents << with(:wants_security)
+output_documents << with(:wants_lump_sum)
+output_documents << with(:poor_health)
 
 # Generic
-output_documents << with([], 'pension')
-output_documents << with([], 'other')
+output_documents << with([])
 
 # Ineligible
 10.times do
@@ -68,7 +59,6 @@ end
 
 # Bad data
 output_documents << SampleOutputDocument.new(variant: 'test')
-output_documents << SampleOutputDocument.new(income_in_retirement: 'lottery')
 output_documents << SampleOutputDocument.new(
   attendee_name: '',
   attendee_address_line_1: '',
