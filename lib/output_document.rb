@@ -18,7 +18,6 @@ class OutputDocument
                 :guider_organisation,
                 :appointment_reference,
                 :appointment_date,
-                :value_of_pension_pots,
                 :income_in_retirement,
                 :continue_working,
                 :unsure,
@@ -43,7 +42,6 @@ class OutputDocument
                  guider_organisation: nil,
                  appointment_reference: nil,
                  appointment_date: nil,
-                 value_of_pension_pots: nil,
                  income_in_retirement: nil,
                  continue_working: nil,
                  unsure: nil,
@@ -68,7 +66,6 @@ class OutputDocument
     self.guider_organisation = guider_organisation
     self.appointment_reference = appointment_reference
     self.appointment_date = appointment_date
-    self.value_of_pension_pots = value_of_pension_pots
     self.income_in_retirement = income_in_retirement
     self.continue_working = continue_working
     self.unsure = unsure
@@ -107,7 +104,6 @@ class OutputDocument
       guider_organisation,
       appointment_reference,
       appointment_date,
-      value_of_pension_pots,
       income_in_retirement,
       continue_working,
       unsure,

@@ -25,7 +25,6 @@ CSV_HEADERS = %w(
   guider_organisation
   appointment_reference
   appointment_date
-  value_of_pension_pots
   income_in_retirement
   continue_working
   unsure

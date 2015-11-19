@@ -19,7 +19,6 @@ class SampleOutputDocument < OutputDocument
                  guider_organisation: nil,
                  appointment_reference: nil,
                  appointment_date: nil,
-                 value_of_pension_pots: nil,
                  income_in_retirement: nil,
                  continue_working: nil,
                  unsure: nil,
@@ -46,18 +45,6 @@ class SampleOutputDocument < OutputDocument
     guider_organisation ||= ['The Pensions Advisory Service', 'Pension Wise'].sample
 
     appointment_date ||= Faker::Date.forward(1_825).strftime('%-e %B %Y')
-
-    value_of_pension_pots ||= begin
-      thousands = Faker::Number.number(2).to_i
-      hundreds = Faker::Number.number(3)
-
-      [
-        "£#{thousands},000 (approximately)",
-        "£#{thousands},000 to £#{thousands.to_i+Faker::Number.digit.to_i},500",
-        "£#{thousands},#{hundreds}",
-        'No value given'
-      ].sample
-    end
 
     income_in_retirement = %w(pension other).sample
 
