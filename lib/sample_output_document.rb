@@ -17,14 +17,7 @@ class SampleOutputDocument < OutputDocument
                  lead: nil,
                  guider_first_name: nil,
                  guider_organisation: nil,
-                 appointment_date: nil,
-                 continue_working: nil,
-                 unsure: nil,
-                 leave_inheritance: nil,
-                 wants_flexibility: nil,
-                 wants_security: nil,
-                 wants_lump_sum: nil,
-                 poor_health: nil)
+                 appointment_date: nil)
 
     id ||= rand(123456)
 
@@ -44,28 +37,11 @@ class SampleOutputDocument < OutputDocument
 
     appointment_date ||= Faker::Date.forward(1_825).strftime('%-e %B %Y')
 
-    continue_working = [true, false].sample
-    unsure = [true, false].sample
-    leave_inheritance = [true, false].sample
-    wants_flexibility = [true, false].sample
-    wants_security = [true, false].sample
-    wants_lump_sum = [true, false].sample
-    poor_health = [true, false].sample
-
     lead ||= 'You recently had a Pension Wise guidance appointment with ' +
       "#{guider_first_name} from #{guider_organisation} on #{appointment_date}."
 
-    super
-  end
+    variant ||= 'standard'
 
-  def variant
-    super || begin
-      if continue_working || unsure || leave_inheritance || wants_flexibility ||
-        wants_security || wants_lump_sum || poor_health
-        'tailored'
-      else
-        'generic'
-      end
-    end
+    super
   end
 end

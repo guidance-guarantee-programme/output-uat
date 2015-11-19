@@ -16,14 +16,7 @@ class OutputDocument
                 :lead,
                 :guider_first_name,
                 :guider_organisation,
-                :appointment_date,
-                :continue_working,
-                :unsure,
-                :leave_inheritance,
-                :wants_flexibility,
-                :wants_security,
-                :wants_lump_sum,
-                :poor_health
+                :appointment_date
 
   def initialize(id:,
                  format: 'standard',
@@ -38,14 +31,7 @@ class OutputDocument
                  lead:,
                  guider_first_name: nil,
                  guider_organisation: nil,
-                 appointment_date: nil,
-                 continue_working: nil,
-                 unsure: nil,
-                 leave_inheritance: nil,
-                 wants_flexibility: nil,
-                 wants_security: nil,
-                 wants_lump_sum: nil,
-                 poor_health: nil)
+                 appointment_date: nil)
 
     self.id = id
     self.format = format
@@ -61,13 +47,6 @@ class OutputDocument
     self.guider_first_name = guider_first_name
     self.guider_organisation = guider_organisation
     self.appointment_date = appointment_date
-    self.continue_working = continue_working
-    self.unsure = unsure
-    self.leave_inheritance = leave_inheritance
-    self.wants_flexibility = wants_flexibility
-    self.wants_security = wants_security
-    self.wants_lump_sum = wants_lump_sum
-    self.poor_health = poor_health
   end
 
   def attendee_address
@@ -96,14 +75,7 @@ class OutputDocument
       lead,
       guider_first_name,
       guider_organisation,
-      appointment_date,
-      continue_working,
-      unsure,
-      leave_inheritance,
-      wants_flexibility,
-      wants_security,
-      wants_lump_sum,
-      poor_health
+      appointment_date
     ]
   end
 
