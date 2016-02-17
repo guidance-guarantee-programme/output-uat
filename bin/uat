@@ -90,7 +90,7 @@ output_documents << SampleOutputDocument.new(
   output_documents << SampleOutputDocument.new
 end
 
-# Write CSV for http://github.com/guidance-guarantee-programme/contingent_pdf_output
+# Write CSV
 CSV.open("./dist/#{filename}", 'wb', col_sep: ',', encoding: 'UTF-16:UTF-8') do |csv|
   csv << CSV_HEADERS
 
