@@ -13,6 +13,7 @@ class OutputDocument
                 :attendee_town,
                 :attendee_county,
                 :attendee_postcode,
+                :attendee_country,
                 :lead,
                 :guider_first_name,
                 :guider_organisation,
@@ -32,6 +33,7 @@ class OutputDocument
                  attendee_town:,
                  attendee_county: nil,
                  attendee_postcode:,
+                 attendee_country:,
                  lead:,
                  guider_first_name: nil,
                  guider_organisation: nil,
@@ -51,6 +53,7 @@ class OutputDocument
     self.attendee_town = attendee_town
     self.attendee_county = attendee_county
     self.attendee_postcode = attendee_postcode
+    self.attendee_country = attendee_country
     self.lead = lead
     self.guider_first_name = guider_first_name
     self.guider_organisation = guider_organisation
@@ -84,6 +87,7 @@ class OutputDocument
       attendee_town,
       attendee_county,
       attendee_postcode,
+      attendee_country,
       lead,
       guider_first_name,
       guider_organisation,

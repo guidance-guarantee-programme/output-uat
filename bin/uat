@@ -20,6 +20,7 @@ CSV_HEADERS = %w(
   attendee_town
   attendee_county
   attendee_postcode
+  attendee_country
   lead
   supplementary_benefits
   supplementary_debt
@@ -42,9 +43,34 @@ output_documents << with(:supplementary_defined_benefit_pensions)
 # Standard
 output_documents << with([])
 
+# Large text
+output_documents << SampleOutputDocument.new(format: 'large_text')
+
+# Overseas
+3.times do
+  output_documents << SampleOutputDocument.new(attendee_country: 'France')
+  output_documents << SampleOutputDocument.new(
+    attendee_country: 'Australia',
+    format: 'large_text'
+  )
+end
+
+# 50-54 variant
+3.times do
+  output_documents << SampleOutputDocument.new(variant: '50_54')
+  output_documents << SampleOutputDocument.new(
+    variant: '50_54',
+    format: 'large_text'
+  )
+end
+
 # Ineligible
 10.times do
   output_documents << SampleOutputDocument.new(variant: 'other')
+  output_documents << SampleOutputDocument.new(
+    variant: 'other',
+    format: 'large_text'
+  )
 end
 
 # Bad data
@@ -56,7 +82,8 @@ output_documents << SampleOutputDocument.new(
   attendee_address_line_3: '',
   attendee_town: '',
   attendee_county: '',
-  attendee_postcode: ''
+  attendee_postcode: '',
+  attendee_country: ''
 )
 
 # Max allowed name
