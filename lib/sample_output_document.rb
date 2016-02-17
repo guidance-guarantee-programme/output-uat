@@ -14,6 +14,7 @@ class SampleOutputDocument < OutputDocument
                  attendee_town: nil,
                  attendee_county: nil,
                  attendee_postcode: nil,
+                 attendee_country: nil,
                  lead: nil,
                  guider_first_name: nil,
                  guider_organisation: nil,
