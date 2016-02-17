@@ -117,19 +117,12 @@ output_documents << SampleOutputDocument.new(
   output_documents << SampleOutputDocument.new
 end
 
-# Write CSV for http://github.com/guidance-guarantee-programme/contingent_pdf_output
+# Write CSV
 CSV.open("./dist/#{filename}", 'wb', col_sep: ',', encoding: 'UTF-16:UTF-8') do |csv|
   csv << CSV_HEADERS
 
   output_documents.first(LIMIT).each_with_index do |output_document, index|
     output_document.id = index + 1
-
-    output_document.attendee_address_line_1,
-      output_document.attendee_address_line_2,
-      output_document.attendee_address_line_3,
-      output_document.attendee_town,
-      output_document.attendee_county,
-      output_document.attendee_postcode = *output_document.attendee_address.compact
 
     csv << output_document.to_array
   end
