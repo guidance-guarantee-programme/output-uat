@@ -17,17 +17,11 @@ class SampleOutputDocument < OutputDocument
                  lead: nil,
                  guider_first_name: nil,
                  guider_organisation: nil,
-                 appointment_reference: nil,
                  appointment_date: nil,
-                 value_of_pension_pots: nil,
-                 income_in_retirement: nil,
-                 continue_working: nil,
-                 unsure: nil,
-                 leave_inheritance: nil,
-                 wants_flexibility: nil,
-                 wants_security: nil,
-                 wants_lump_sum: nil,
-                 poor_health: nil)
+                 supplementary_benefits: nil,
+                 supplementary_debt: nil,
+                 supplementary_ill_health: nil,
+                 supplementary_defined_benefit_pensions: nil)
 
     id ||= rand(123456)
 
@@ -47,46 +41,16 @@ class SampleOutputDocument < OutputDocument
 
     appointment_date ||= Faker::Date.forward(1_825).strftime('%-e %B %Y')
 
-    value_of_pension_pots ||= begin
-      thousands = Faker::Number.number(2).to_i
-      hundreds = Faker::Number.number(3)
-
-      [
-        "£#{thousands},000 (approximately)",
-        "£#{thousands},000 to £#{thousands.to_i+Faker::Number.digit.to_i},500",
-        "£#{thousands},#{hundreds}",
-        'No value given'
-      ].sample
-    end
-
-    income_in_retirement = %w(pension other).sample
-
-    continue_working = [true, false].sample
-    unsure = [true, false].sample
-    leave_inheritance = [true, false].sample
-    wants_flexibility = [true, false].sample
-    wants_security = [true, false].sample
-    wants_lump_sum = [true, false].sample
-    poor_health = [true, false].sample
+    supplementary_benefits = [true, false].sample
+    supplementary_debt = [true, false].sample
+    supplementary_ill_health = [true, false].sample
+    supplementary_defined_benefit_pensions = [true, false].sample
 
     lead ||= 'You recently had a Pension Wise guidance appointment with ' +
       "#{guider_first_name} from #{guider_organisation} on #{appointment_date}."
 
+    variant ||= 'standard'
+
     super
-  end
-
-  def appointment_reference
-    super || "#{id}/#{rand(123456)}"
-  end
-
-  def variant
-    super || begin
-      if continue_working || unsure || leave_inheritance || wants_flexibility ||
-        wants_security || wants_lump_sum || poor_health
-        'tailored'
-      else
-        'generic'
-      end
-    end
   end
 end

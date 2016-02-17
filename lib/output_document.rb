@@ -16,17 +16,11 @@ class OutputDocument
                 :lead,
                 :guider_first_name,
                 :guider_organisation,
-                :appointment_reference,
                 :appointment_date,
-                :value_of_pension_pots,
-                :income_in_retirement,
-                :continue_working,
-                :unsure,
-                :leave_inheritance,
-                :wants_flexibility,
-                :wants_security,
-                :wants_lump_sum,
-                :poor_health
+                :supplementary_benefits,
+                :supplementary_debt,
+                :supplementary_ill_health,
+                :supplementary_defined_benefit_pensions
 
   def initialize(id:,
                  format: 'standard',
@@ -41,17 +35,11 @@ class OutputDocument
                  lead:,
                  guider_first_name: nil,
                  guider_organisation: nil,
-                 appointment_reference: nil,
                  appointment_date: nil,
-                 value_of_pension_pots: nil,
-                 income_in_retirement: nil,
-                 continue_working: nil,
-                 unsure: nil,
-                 leave_inheritance: nil,
-                 wants_flexibility: nil,
-                 wants_security: nil,
-                 wants_lump_sum: nil,
-                 poor_health: nil)
+                 supplementary_benefits: nil,
+                 supplementary_debt: nil,
+                 supplementary_ill_health: nil,
+                 supplementary_defined_benefit_pensions: nil)
 
     self.id = id
     self.format = format
@@ -66,17 +54,11 @@ class OutputDocument
     self.lead = lead
     self.guider_first_name = guider_first_name
     self.guider_organisation = guider_organisation
-    self.appointment_reference = appointment_reference
     self.appointment_date = appointment_date
-    self.value_of_pension_pots = value_of_pension_pots
-    self.income_in_retirement = income_in_retirement
-    self.continue_working = continue_working
-    self.unsure = unsure
-    self.leave_inheritance = leave_inheritance
-    self.wants_flexibility = wants_flexibility
-    self.wants_security = wants_security
-    self.wants_lump_sum = wants_lump_sum
-    self.poor_health = poor_health
+    self.supplementary_benefits = supplementary_benefits
+    self.supplementary_debt = supplementary_debt
+    self.supplementary_ill_health = supplementary_ill_health
+    self.supplementary_defined_benefit_pensions = supplementary_defined_benefit_pensions
   end
 
   def attendee_address
@@ -105,17 +87,11 @@ class OutputDocument
       lead,
       guider_first_name,
       guider_organisation,
-      appointment_reference,
       appointment_date,
-      value_of_pension_pots,
-      income_in_retirement,
-      continue_working,
-      unsure,
-      leave_inheritance,
-      wants_flexibility,
-      wants_security,
-      wants_lump_sum,
-      poor_health
+      supplementary_benefits,
+      supplementary_debt,
+      supplementary_ill_health,
+      supplementary_defined_benefit_pensions
     ]
   end
 

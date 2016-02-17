@@ -21,19 +21,10 @@ CSV_HEADERS = %w(
   attendee_county
   attendee_postcode
   lead
-  guider_first_name
-  guider_organisation
-  appointment_reference
-  appointment_date
-  value_of_pension_pots
-  income_in_retirement
-  continue_working
-  unsure
-  leave_inheritance
-  wants_flexibility
-  wants_security
-  wants_lump_sum
-  poor_health
+  supplementary_benefits
+  supplementary_debt
+  supplementary_ill_health
+  supplementary_defined_benefit_pensions
 )
 
 LIMIT = 150
@@ -42,25 +33,14 @@ filename = "pensionwise_output_#{Date.today.strftime('%Y%m%d')}.csv"
 long_name = 'Mr Hubert Blain-Wolfeschlegelsteinhausenbergerderr'
 output_documents = []
 
-# Tailored, with one circumstance each
-output_documents << with(:continue_working, 'pension')
-output_documents << with(:continue_working, 'other')
-output_documents << with(:unsure, 'pension')
-output_documents << with(:unsure, 'other')
-output_documents << with(:leave_inheritance, 'pension')
-output_documents << with(:leave_inheritance, 'other')
-output_documents << with(:wants_flexibility, 'pension')
-output_documents << with(:wants_flexibility, 'other')
-output_documents << with(:wants_security, 'pension')
-output_documents << with(:wants_security, 'other')
-output_documents << with(:wants_lump_sum, 'pension')
-output_documents << with(:wants_lump_sum, 'other')
-output_documents << with(:poor_health, 'pension')
-output_documents << with(:poor_health, 'other')
+# Supplementary information
+output_documents << with(:supplementary_benefits)
+output_documents << with(:supplementary_debt)
+output_documents << with(:supplementary_ill_health)
+output_documents << with(:supplementary_defined_benefit_pensions)
 
-# Generic
-output_documents << with([], 'pension')
-output_documents << with([], 'other')
+# Standard
+output_documents << with([])
 
 # Ineligible
 10.times do
@@ -69,7 +49,6 @@ end
 
 # Bad data
 output_documents << SampleOutputDocument.new(variant: 'test')
-output_documents << SampleOutputDocument.new(income_in_retirement: 'lottery')
 output_documents << SampleOutputDocument.new(
   attendee_name: '',
   attendee_address_line_1: '',

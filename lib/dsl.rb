@@ -1,19 +1,14 @@
 require_relative './sample_output_document'
 
 module DSL
-  def with(circumstances, income_in_retirement)
+  def with(supplementary_information)
     SampleOutputDocument.new.tap do |output_document|
-      output_document.income_in_retirement = income_in_retirement
+      output_document.supplementary_benefits = false
+      output_document.supplementary_debt = false
+      output_document.supplementary_ill_health = false
+      output_document.supplementary_defined_benefit_pensions = false
 
-      output_document.continue_working = false
-      output_document.leave_inheritance = false
-      output_document.poor_health = false
-      output_document.unsure = false
-      output_document.wants_flexibility = false
-      output_document.wants_lump_sum = false
-      output_document.wants_security = false
-
-      Array(circumstances).each { |c| output_document.public_send(:"#{c}=", true) }
+      Array(supplementary_information).each { |s_i| output_document.public_send(:"#{s_i}=", true) }
     end
   end
 end
