@@ -34,7 +34,20 @@ filename = "pensionwise_output_#{Date.today.strftime('%Y%m%d')}.csv"
 long_name = 'Mr Hubert Blain-Wolfeschlegelsteinhausenbergerderr'
 output_documents = []
 
-# Supplementary information
+# Version with all supplementary fields
+%w(standard 50_54).each do |variant|
+  %w(standard large_text).each do |format|
+    doc = SampleOutputDocument.new(variant: variant, format: format)
+    doc.supplementary_benefits = true
+    doc.supplementary_debt = true
+    doc.supplementary_ill_health = true
+    doc.supplementary_defined_benefit_pensions = true
+
+    output_documents << doc
+  end
+end
+
+# Supplementary information combinations
 output_documents << with(:supplementary_benefits)
 output_documents << with(:supplementary_debt)
 output_documents << with(:supplementary_ill_health)
