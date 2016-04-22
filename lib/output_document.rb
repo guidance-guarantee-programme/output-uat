@@ -75,6 +75,10 @@ class OutputDocument
     ]
   end
 
+  def attendee_country=(value)
+    @attendee_country = value && value.upcase
+  end
+
   def to_array
     [
       id,
